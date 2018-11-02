@@ -2,28 +2,19 @@
 var VertexShaderText;
 var FragmentShaderText;
 
-getShaders = function (){
-
-    $.ajax({
-        url:'vertexShader.glsl',
-        success: function (data){
-            VertexShaderText = data;
-        }
-    });
-
-    $.ajax({
-        url:'fragmentShader.glsl',
-        success: function (data){
-            FragmentShaderText = data;
-        }
-    });
-}
-
 
 
 var InitDemo = function () {
 
-    getShaders();
+    $.get('/vertexShader.glsl', function(data) {
+        VertexShaderText = data;
+
+    });
+
+    $.get('/fragmentShader.glsl', function(data) {
+        FragmentShaderText = data;
+
+    });
 
 	console.log("Starting...");
 	
