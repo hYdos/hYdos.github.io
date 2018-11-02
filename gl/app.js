@@ -1,20 +1,10 @@
 
-var VertexShaderText;
-var FragmentShaderText;
+var VertexShaderText =  $.get('/vertexShader.glsl');
+var FragmentShaderText = $.get('/fragmentShader.glsl');
 
 
 
 var InitDemo = function () {
-
-    $.get('/vertexShader.glsl', function(data) {
-        VertexShaderText = data;
-
-    });
-
-    $.get('/fragmentShader.glsl', function(data) {
-        FragmentShaderText = data;
-
-    });
 
 	console.log("Starting...");
 	
