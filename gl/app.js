@@ -1,6 +1,6 @@
 
-var VertexShaderText =  $.get('vertexShader.glsl');
-var FragmentShaderText = $.get('fragmentShader.glsl');
+var VertexShaderText =  $.get('vertexShader.glsl').toString();
+var FragmentShaderText = $.get('fragmentShader.glsl').toString();
 
 alert(VertexShaderText);
 
