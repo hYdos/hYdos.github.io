@@ -2,7 +2,7 @@
 var VertexShaderText =  $.get('gl/vertexShader.glsl');
 var FragmentShaderText = $.get('gl/fragmentShader.glsl');
 
-
+alert(VertexShaderText);
 
 var InitDemo = function () {
 
