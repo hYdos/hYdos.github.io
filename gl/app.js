@@ -3,6 +3,7 @@ var VertexShaderText =  $.get('vertexShader.glsl').toString();
 var FragmentShaderText = $.get('fragmentShader.glsl').toString();
 
 alert(VertexShaderText);
+console.log(VertexShaderText);
 
 var InitDemo = function () {
 
