@@ -1,8 +1,25 @@
 
-var VertexShaderText =  $.get('vertexShader.glsl').toString();
-var FragmentShaderText = $.get('fragmentShader.glsl').toString();
+var VertexShaderText =  `precision mediump float;
 
-alert(VertexShaderText);
+attribute vec2 vertPosition;
+attribute vec3 vertColor;
+
+varying vec3 fragColor;
+
+void main()
+{
+    fragColor = vertColor;
+    gl_Position = vec4(vertPosition, 0.0, 1.0);
+}`
+var FragmentShaderText = `precision mediump float;
+
+varying vec3 fragColor;
+
+void main()
+{
+    gl_FragColor = vec4(fragColor, 1.0);
+}`
+
 console.log(VertexShaderText);
 
 var InitDemo = function () {
@@ -66,27 +83,37 @@ var InitDemo = function () {
 	//
 	var triangleVertices =
 	[
-		0.0, 0.5,
-		-0.5, -0.5,
-		0.5, -0.5
+		0.0, 0.5,   1.0,1.0,0.0,
+		-0.5, -0.5, 0.7,0.0,1.0,
+		0.5, -0.5,  0.1,1.0, 0.6
 	];
 	
 	var triangleVertexBufferObject = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexBufferObject);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
-	
-	
-	var positionAttribLocation = gl.getAttribLocation(program, 'vertPosition');
+
+
+    var positionAttribLocation = gl.getAttribLocation(program, 'vertPosition');
+    var colorAttribLocation = gl.getAttribLocation(program, 'vertColor');
 	gl.vertexAttribPointer(
 		positionAttribLocation,
 		2, // number of elements per attribute
 		gl.FLOAT, //type of elements
 		gl.FALSE,
-		2 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
+		5 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
 		0 // offset from the beginning of a single vertex to this attribute
 	);
-	
-	gl.enableVertexAttribArray(positionAttribLocation);
+    gl.vertexAttribPointer(
+        colorAttribLocation,
+        3, // number of elements per attribute
+        gl.FLOAT, //type of elements
+        gl.FALSE,
+        5 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
+        2 * Float32Array.BYTES_PER_ELEMENT // offset from the beginning of a single vertex to this attribute
+    );
+
+    gl.enableVertexAttribArray(positionAttribLocation);
+    gl.enableVertexAttribArray(colorAttribLocation);
 
 	//
     // Main render loop
