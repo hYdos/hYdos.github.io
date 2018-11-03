@@ -1,40 +1,14 @@
-<head>
-    <title>hydos06's hub</title>
-	
-	
-	#footer {
-		position:fixed;
-		left:0px;
-		bottom:0px;
-		height:30px;
-		width:100%;
-		background:#999;
-	}
-
-	
-	<style>
-            body {
-                color: red;
-            }
-            h1 {
-                color: #FFFFFF;
-            }
-            p {
-                color: rgb(0,0,0)
-            }
-			h4 {
-				
-			}
-    </style>
-</head>
-
-<body background="background.jpg">
-
-
-	<!-- MAIN CODE HERE FOR BODY OF PAGE -->
-    <h1 class=Announce>This is where i link my other web pages to my projects!</h1>
-    
-	<p href="http://hydos.github.io/mowingSimulator">MowingSimulatorBuilds</p>
-	
-	<h4 href="bottom" id="footer">| © Copyright hydos06 github.com/hydos.github.io </h4>
-</body>
+<html>
+	<head>
+		<title>WebGL</title>
+	</head>
+	<body onload="Init();">
+		<canvas id="game-surface" width="800" height="600">
+			Your browser does not support HTML5
+		</canvas>
+		<br />
+		<script src="util.js"></script>
+		<script src="gl-matrix.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
