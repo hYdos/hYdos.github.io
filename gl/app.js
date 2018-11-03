@@ -1,15 +1,19 @@
 
 var VertexShaderText =  `precision mediump float;
 
-attribute vec2 vertPosition;
+attribute vec3 vertPosition;
 attribute vec3 vertColor;
 
 varying vec3 fragColor;
 
+uniform mat4 mWorld;
+uniform mat4 mView;
+uniform mat4 mProj;
+
 void main()
 {
     fragColor = vertColor;
-    gl_Position = vec4(vertPosition, 0.0, 1.0);
+    gl_Position = mProj * mView * mWorld * vec4(vertPosition, 1.0);
 }`
 var FragmentShaderText = `precision mediump float;
 
@@ -21,7 +25,7 @@ void main()
 }`
 
 
-var InitDemo = function () {
+var Init = function () {
 
 	console.log("Starting...");
 	
@@ -81,10 +85,10 @@ var InitDemo = function () {
 	// Create Buffer
 	//
 	var triangleVertices =
-	[
-		0.0, 0.5,   1.0,1.0,0.0,
-		-0.5, -0.5, 0.7,0.0,1.0,
-		0.5, -0.5,  0.1,1.0, 0.6
+	[//  x   y     z     r   g   b
+		0.0, 0.5, 0.0,  1.0,1.0,0.0,
+		-0.5, -0.5, 0.0,  0.7,0.0,1.0,
+		0.5, -0.5, 0.0,  0.1,1.0, 0.6
 	];
 	
 	var triangleVertexBufferObject = gl.createBuffer();
@@ -96,10 +100,10 @@ var InitDemo = function () {
     var colorAttribLocation = gl.getAttribLocation(program, 'vertColor');
 	gl.vertexAttribPointer(
 		positionAttribLocation,
-		2, // number of elements per attribute
+		3, // number of elements per attribute
 		gl.FLOAT, //type of elements
 		gl.FALSE,
-		5 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
+		6 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
 		0 // offset from the beginning of a single vertex to this attribute
 	);
     gl.vertexAttribPointer(
@@ -107,18 +111,55 @@ var InitDemo = function () {
         3, // number of elements per attribute
         gl.FLOAT, //type of elements
         gl.FALSE,
-        5 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
-        2 * Float32Array.BYTES_PER_ELEMENT // offset from the beginning of a single vertex to this attribute
+        6 * Float32Array.BYTES_PER_ELEMENT,// size of vertexes
+        3 * Float32Array.BYTES_PER_ELEMENT // offset from the beginning of a single vertex to this attribute
     );
 
     gl.enableVertexAttribArray(positionAttribLocation);
     gl.enableVertexAttribArray(colorAttribLocation);
 
+    //tell open gl to use this shader program
+    gl.useProgram(program);
+
+
+    var matWorldUniformLocation = gl.getUniformLocation(program, 'mWorld');
+    var matViewUniformLocation = gl.getUniformLocation(program, 'mView');
+    var matProjUniformLocation = gl.getUniformLocation(program, 'mProj');
+
+
+    var worldMatrix = new Float32Array(16);
+    var viewMatrix = new Float32Array(16);
+    var projMatrix = new Float32Array(16);
+    mat4.identity(worldMatrix);
+    mat4.lookAt(viewMatrix, [0,0, -2],[0,0,0],[0,1,0]);
+    mat4.perspective(projMatrix, glMatrix.toRadian(45), canvas.width / canvas.height, 0.1, 1000.0);
+
+
+    gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
+    gl.uniformMatrix4fv(matViewUniformLocation, gl.FALSE, viewMatrix);
+    gl.uniformMatrix4fv(matProjUniformLocation, gl.FALSE, projMatrix);
+
+
 	//
     // Main render loop
     //
-    gl.useProgram(program);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    var identityMatrix = new Float32Array(16);
+    mat4.identity(identityMatrix);
+    var angle = 0;
+    var loop = function() {
+
+        angle = performance.now() / 1000 / 6 * 2 * Math.PI;
+        mat4.rotate(worldMatrix, identityMatrix, angle, [0, 1 ,0]);
+        gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
+
+
+        gl.clearColor(0.75, 0.85, 0.8, 1.0);
+        gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+        requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
 	
 	
 };
