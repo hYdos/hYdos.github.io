@@ -1,22 +1,22 @@
 var gl;
 
 var Init = function () {
-	loadTextResource('/shader.vs.glsl', function (vsErr, vsText) {
+	loadTextResource('shader.vs.glsl', function (vsErr, vsText) {
 		if (vsErr) {
 			alert('Fatal error getting vertex shader (see console)');
 			console.error(vsErr);
 		} else {
-			loadTextResource('/shader.fs.glsl', function (fsErr, fsText) {
+			loadTextResource('shader.fs.glsl', function (fsErr, fsText) {
 				if (fsErr) {
 					alert('Fatal error getting fragment shader (see console)');
 					console.error(fsErr);
 				} else {
-					loadJSONResource('/Susan.json', function (modelErr, modelObj) {
+					loadJSONResource('Susan.json', function (modelErr, modelObj) {
 						if (modelErr) {
 							alert('Fatal error getting Susan model (see console)');
 							console.error(fsErr);
 						} else {
-							loadImage('/SusanTexture.png', function (imgErr, img) {
+							loadImage('SusanTexture.png', function (imgErr, img) {
 								if (imgErr) {
 									alert('Fatal error getting Susan texture (see console)');
 									console.error(imgErr);
@@ -33,7 +33,7 @@ var Init = function () {
 };
 
 var Run = function (vertexShaderText, fragmentShaderText, SusanImage, SusanModel) {
-	console.log('This is working');
+	console.log('Starting');
 
 	var canvas = document.getElementById('game-surface');
 	gl = canvas.getContext('webgl');
