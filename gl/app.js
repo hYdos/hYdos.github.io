@@ -1,6 +1,6 @@
 var gl;
 
-var InitDemo = function () {
+var Init = function () {
 	loadTextResource('/shader.vs.glsl', function (vsErr, vsText) {
 		if (vsErr) {
 			alert('Fatal error getting vertex shader (see console)');
@@ -21,7 +21,7 @@ var InitDemo = function () {
 									alert('Fatal error getting Susan texture (see console)');
 									console.error(imgErr);
 								} else { 
-									RunDemo(vsText, fsText, img, modelObj);
+									Run(vsText, fsText, img, modelObj);
 								}
 							});
 						}
@@ -32,7 +32,7 @@ var InitDemo = function () {
 	});
 };
 
-var RunDemo = function (vertexShaderText, fragmentShaderText, SusanImage, SusanModel) {
+var Run = function (vertexShaderText, fragmentShaderText, SusanImage, SusanModel) {
 	console.log('This is working');
 
 	var canvas = document.getElementById('game-surface');
