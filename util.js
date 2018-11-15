@@ -1,35 +1,75 @@
-// Load a text resource from a file over the network
-var loadTextResource = function (url, callback) {
-	var request = new XMLHttpRequest();
-	request.open('GET', url + '?please-dont-cache=' + Math.random(), true);
-	request.onload = function () {
-		if (request.status < 200 || request.status > 299) {
-			callback('Error: HTTP Status ' + request.status + ' on resource ' + url);
-		} else {
-			callback(null, request.responseText);
-		}
-	};
-	request.send();
+'use strict';
+
+// Answer provided by 'jolly.exe' in StackOverflow post
+//  http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+// Taken from http://stackoverflow.com/questions/641857/javascript-window-resize-event
+//  Post by user Alex V
+function AddEvent(object, type, callback) {
+    if (object == null || typeof(object) == 'undefined') return;
+    if (object.addEventListener) {
+        object.addEventListener(type, callback, false);
+    } else if (object.attachEvent) {
+        object.attachEvent("on" + type, callback);
+    } else {
+        object["on"+type] = callback;
+    }
 };
 
-var loadImage = function (url, callback) {
-	var image = new Image();
-	image.onload = function () {
-		callback(null, image);
-	};
-	image.src = url;
+function RemoveEvent(object, type, callback) {
+    if (object == null || typeof(object) == 'undefined') return;
+    if (object.removeEventListener) {
+        object.removeEventListener(type, callback, false);
+    } else if (object.detachEvent) {
+        object.detachEvent("on" + type, callback);
+    } else {
+        object["on"+type] = callback;
+    }
 };
 
-var loadJSONResource = function (url, callback) {
-	loadTextResource(url, function (err, result) {
-		if (err) {
-			callback(err);
-		} else {
-			try {
-				callback(null, JSON.parse(result));
-			} catch (e) {
-				callback(e);
-			}
-		}
-	});
+function LoadTextResource (url, cb) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open('GET', url, true);
+    xmlhttp.onload = function (e) {
+        if (xmlhttp.status < 200 || xmlhttp.status >= 300) {
+            console.error('ERROR loading text resource', url, xmlhttp.status, xmlhttp.statusText);
+            cb(new Error(xmlhttp.statusText));
+        } else {
+            cb(null, xmlhttp.responseText);
+        }
+    };
+    xmlhttp.onerror = cb;
+    xmlhttp.send();
+};
+
+function LoadJSONResource (url, cb) {
+    LoadTextResource(url, function (err, res) {
+        if (err) {
+            cb(err);
+        } else {
+            try {
+                var obj = JSON.parse(res);
+                cb(null, obj);
+            } catch (e) {
+                cb(e);
+            }
+        }
+    });
+};
+
+function LoadImage (url, cb) {
+    var image = new Image();
+    image.onload = function () {
+        cb (null, image);
+    };
+    image.src = url;
 };
