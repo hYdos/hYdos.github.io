@@ -13,7 +13,7 @@ async function Init() {
 		alert('Your browser does not support WebGL - please use a different browser\nGoogleChrome works great!');
 		return;
 	}
-
+	var models = [];
 	Scene = new LightMapDemoScene(gl);
 	Scene.Load(models,
 		function (demoLoadError) {

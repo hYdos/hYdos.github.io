@@ -17,7 +17,6 @@ function computeFps() {
         //Write value in HTML
         //multiply with 1000.0 / (timeNow - timeLast) for accuracy
         document.getElementById("FPS").innerHTML = "FPS: " + Number(fps * 1000.0 / (timeNow - timeLast)).toPrecision( 5 );
-        console.log("FPS: " + Number(fps * 1000.0 / (timeNow - timeLast)).toPrecision( 5 ));
         //reset
         timeLast = timeNow;
         fps = 0;
@@ -30,13 +29,12 @@ var LightMapDemoScene = function (gl) {
     this.clrColor = [1,0.5,0.5];
 };
 
-LightMapDemoScene.prototype.Load = async function (cb) {
+LightMapDemoScene.prototype.Load = async function (models, cb) {
 	console.log('Loading demo scene');
     tick();
 	var me = this;
 
     const customModelTest = await loadJsonFile("mower.json");
-    console.log("loaded");
 
 	async.parallel({
 		Models: function (callback) {
@@ -476,8 +474,8 @@ LightMapDemoScene.prototype._Update = function (dt) {
 		this.camera.rotateRight(dt / 1000 * this.RotateSpeed);
 	}
 
-	this.lightDisplacementInputAngle += dt / 2337;
-	var xDisplacement = Math.sin(this.lightDisplacementInputAngle) * 2.8;
+	this.lightDisplacementInputAngle += dt / 300;
+	var xDisplacement = Math.sin(this.lightDisplacementInputAngle) * 2.3;
 
 	this.LightMesh.world[12] = xDisplacement;
 	for (var i = 0; i < this.shadowMapCameras.length; i++) {
@@ -633,7 +631,6 @@ LightMapDemoScene.prototype._Render = function () {
 
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.Meshes[i].ibo);
 		gl.drawElements(this.renderType, this.Meshes[i].nPoints, gl.UNSIGNED_SHORT, 0);
-		console.log("rendered");
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 	}
 };
@@ -719,7 +716,6 @@ LightMapDemoScene.prototype._OnKeyUp = function (e) {
 			this.PressedKeys.RotLeft = false;
 			break;
         case 'KeyQ':
-            console.log(this.renderType);
             if(this.renderType === 1){
                 this.renderType = this.gl.TRIANGLES;
             }else if(this.renderType === this.gl.TRIANGLES){
