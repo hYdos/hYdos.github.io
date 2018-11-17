@@ -1,6 +1,6 @@
 'use strict';
 
-var Demo;
+var Scene;
 
 function Init() {
 	var canvas = document.getElementById('gl-surface');
@@ -14,13 +14,13 @@ function Init() {
 		return;
 	}
 
-	Demo = new LightMapDemoScene(gl);
-	Demo.Load(function (demoLoadError) {
+	Scene = new LightMapDemoScene(gl);
+	Scene.Load(function (demoLoadError) {
 		if (demoLoadError) {
 			alert('Could not load the demo - see console for more details');
 			console.error(demoLoadError);
 		} else {
-			Demo.Begin();
+			Scene.Begin();
 		}
 	});
 }

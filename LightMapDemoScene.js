@@ -4,6 +4,8 @@
 
 var LightMapDemoScene = function (gl) {
 	this.gl = gl;
+    this.renderType = gl.TRIANGLES;
+    this.clrColor = [0,1,0];
 };
 
 LightMapDemoScene.prototype.Load = function (cb) {
@@ -40,13 +42,7 @@ LightMapDemoScene.prototype.Load = function (cb) {
 			var mesh = loadResults.Models.RoomModel.meshes[i];
 			switch (mesh.name) {
 				case 'MonkeyMesh':
-					me.MonkeyMesh = new Model(
-						me.gl,
-						mesh.vertices,
-						[].concat.apply([], mesh.faces),
-						mesh.normals,
-						vec4.fromValues(0.8, 0.8, 1.0, 1.0)
-					);
+					me.MonkeyMesh = new Model(me.gl, mesh.vertices, [].concat.apply([], mesh.faces), mesh.normals, vec4.fromValues(0.8, 0.8, 1.0, 1.0));
 					mat4.rotate(
 						me.MonkeyMesh.world, me.MonkeyMesh.world,
 						glMatrix.toRadian(94.87),
@@ -555,7 +551,7 @@ LightMapDemoScene.prototype._Render = function () {
 
 	gl.viewport(0, 0, gl.canvas.clientWidth, gl.canvas.clientHeight);
 
-	gl.clearColor(0, 0, 0, 1);
+	gl.clearColor(this.clrColor[0], this.clrColor[1], this.clrColor[2], 1);
 	gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
 
 	gl.useProgram(this.ShadowProgram);
@@ -605,7 +601,7 @@ LightMapDemoScene.prototype._Render = function () {
 		gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.Meshes[i].ibo);
-		gl.drawElements(gl.TRIANGLES, this.Meshes[i].nPoints, gl.UNSIGNED_SHORT, 0);
+		gl.drawElements(this.renderType, this.Meshes[i].nPoints, gl.UNSIGNED_SHORT, 0);
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 	}
 };
@@ -690,5 +686,14 @@ LightMapDemoScene.prototype._OnKeyUp = function (e) {
 		case 'ArrowLeft':
 			this.PressedKeys.RotLeft = false;
 			break;
+        case 'KeyQ':
+            console.log(this.renderType);
+            if(this.renderType === 1){
+                this.renderType = this.gl.TRIANGLES;
+            }else if(this.renderType === this.gl.TRIANGLES){
+                this.renderType = this.gl.LINES;
+            }
+
+
 	}
 };
