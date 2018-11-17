@@ -2,7 +2,7 @@
 
 var Scene;
 
-function Init() {
+async function Init() {
 	var canvas = document.getElementById('gl-surface');
 	var gl = canvas.getContext('webgl');
 	if (!gl) {
@@ -15,11 +15,16 @@ function Init() {
 	}
 
 	Scene = new LightMapDemoScene(gl);
-	Scene.Load(function (demoLoadError) {
+	Scene.Load(models,
+		function (demoLoadError) {
 		if (demoLoadError) {
 			alert('Could not load the demo - see console for more details');
 			console.error(demoLoadError);
 		} else {
+
+
+
+
 			Scene.Begin();
 		}
 	});

@@ -1,6 +1,6 @@
 'use strict';
 
-var Model = function (gl, vertices, indices, normals, color) {
+var ColouredModel = function (gl, vertices, indices, normals, color) {
 	this.vbo = gl.createBuffer();
 	this.ibo = gl.createBuffer();
 	this.nbo = gl.createBuffer();
@@ -20,6 +20,12 @@ var Model = function (gl, vertices, indices, normals, color) {
 
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+};
+
+var createColouredModel = async function (gl, File, Colour) {
+
+
+
 };
 
 var CreateShaderProgram = function (gl, vsText, fsText) {

@@ -1,17 +1,42 @@
 'use strict';
 
-// Array flattening trick from http://stackoverflow.com/questions/10865025/merge-flatten-a-multidimensional-array-in-javascript
+var timeNow = 0;
+var fps = 0;
+var timeLast = 0;
+
+function tick() {
+    window.requestAnimationFrame(tick);
+    computeFps();
+}
+
+function computeFps() {
+    timeNow = new Date().getTime();
+    fps++;
+
+    if (timeNow - timeLast >= 1000) {
+        //Write value in HTML
+        //multiply with 1000.0 / (timeNow - timeLast) for accuracy
+        document.getElementById("FPS").innerHTML = "FPS: " + Number(fps * 1000.0 / (timeNow - timeLast)).toPrecision( 5 );
+        console.log("FPS: " + Number(fps * 1000.0 / (timeNow - timeLast)).toPrecision( 5 ));
+        //reset
+        timeLast = timeNow;
+        fps = 0;
+    }
+}
 
 var LightMapDemoScene = function (gl) {
 	this.gl = gl;
     this.renderType = gl.TRIANGLES;
-    this.clrColor = [0,1,0];
+    this.clrColor = [1,0.5,0.5];
 };
 
-LightMapDemoScene.prototype.Load = function (cb) {
+LightMapDemoScene.prototype.Load = async function (cb) {
 	console.log('Loading demo scene');
-
+    tick();
 	var me = this;
+
+    const customModelTest = await loadJsonFile("mower.json");
+    console.log("loaded");
 
 	async.parallel({
 		Models: function (callback) {
@@ -36,61 +61,59 @@ LightMapDemoScene.prototype.Load = function (cb) {
 		}
 
 		//
-		// Create Model objects
+		// Create ColouredModel objects
 		//
 		for (var i = 0; i < loadResults.Models.RoomModel.meshes.length; i++) {
-			var mesh = loadResults.Models.RoomModel.meshes[i];
-			switch (mesh.name) {
-				case 'MonkeyMesh':
-					me.MonkeyMesh = new Model(me.gl, mesh.vertices, [].concat.apply([], mesh.faces), mesh.normals, vec4.fromValues(0.8, 0.8, 1.0, 1.0));
-					mat4.rotate(
-						me.MonkeyMesh.world, me.MonkeyMesh.world,
-						glMatrix.toRadian(94.87),
-						vec3.fromValues(0, 0, -1)
-					);
-					mat4.translate(
-						me.MonkeyMesh.world, me.MonkeyMesh.world,
-						vec4.fromValues(2.07919, -0.98559, 1.75740)
-					);
-					break;
-				case 'TableMesh':
-					me.TableMesh = new Model(
-						me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-						mesh.normals, vec4.fromValues(1, 0, 1, 1)
-					);
-					mat4.translate(
-						me.TableMesh.world, me.TableMesh.world,
-						vec3.fromValues(1.57116, -0.79374, 0.49672)
-					);
-					break;
-				case 'SofaMesh':
-					me.SofaMesh = new Model(
-						me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-						mesh.normals, vec4.fromValues(0, 1, 1, 1)	
-					);
-					mat4.translate(
-						me.SofaMesh.world, me.SofaMesh.world,
-						vec3.fromValues(-3.28768, 0, 0.78448)
-					);
-					break;
-				case 'LightBulbMesh':
-					me.lightPosition = vec3.fromValues(0, 0.0, 2.58971);
-					me.LightMesh = new Model(
-						me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-						mesh.normals, vec4.fromValues(4, 4, 4, 1)
-					);
-					mat4.translate(me.LightMesh.world, me.LightMesh.world,
-						me.lightPosition
-					);
-					break;
-				case 'WallsMesh':
-					me.WallsMesh = new Model(
-						me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-						mesh.normals, vec4.fromValues(0.3, 0.3, 0.3, 1)
-					);
-					break;
-			}
-		}
+            var mesh = loadResults.Models.RoomModel.meshes[i];
+            switch (mesh.name) {
+                case 'TableMesh':
+                    me.TableMesh = new ColouredModel(
+                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
+                        mesh.normals, vec4.fromValues(1, 0, 1, 1)
+                    );
+                    mat4.translate(
+                        me.TableMesh.world, me.TableMesh.world,
+                        vec3.fromValues(1.57116, -0.79374, 0.49672)
+                    );
+                    break;
+                case 'SofaMesh':
+                    me.SofaMesh = new ColouredModel(
+                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
+                        mesh.normals, vec4.fromValues(0, 1, 1, 1)
+                    );
+                    mat4.translate(
+                        me.SofaMesh.world, me.SofaMesh.world,
+                        vec3.fromValues(-3.28768, 0, 0.78448)
+                    );
+                    break;
+                case 'LightBulbMesh':
+                    me.lightPosition = vec3.fromValues(0, 0.0, 2.58971);
+                    me.LightMesh = new ColouredModel(
+                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
+                        mesh.normals, vec4.fromValues(4, 4, 4, 1)
+                    );
+                    mat4.translate(me.LightMesh.world, me.LightMesh.world,
+                        me.lightPosition
+                    );
+                    break;
+                case 'WallsMesh':
+                    me.WallsMesh = new ColouredModel(
+                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
+                        mesh.normals, vec4.fromValues(0.3, 0.3, 0.3, 1)
+                    );
+                    break;
+            }
+        }
+        me.MonkeyMesh = new ColouredModel(me.gl, customModelTest.meshes[0].vertices, [].concat.apply([], customModelTest.meshes[0].faces), customModelTest.meshes[0].normals, vec4.fromValues(0.8, 0.8, 1.0, 1.0));
+        mat4.rotate(
+            me.MonkeyMesh.world, me.MonkeyMesh.world,
+            glMatrix.toRadian(94.87),
+            vec3.fromValues(0, 0, -1)
+        );
+        mat4.translate(
+            me.MonkeyMesh.world, me.MonkeyMesh.world,
+            vec4.fromValues(2.07919, -0.98559, 1.75740)
+        );
 
 		if (!me.MonkeyMesh) {
 			cb('Failed to load monkey mesh'); return;
@@ -408,10 +431,18 @@ LightMapDemoScene.prototype.End = function () {
 // Private Methods
 //
 LightMapDemoScene.prototype._Update = function (dt) {
-	mat4.rotateZ(
-		this.MonkeyMesh.world, this.MonkeyMesh.world,
-		dt / 1000 * 2 * Math.PI *    0.3
-	);
+    mat4.rotateZ(
+        this.MonkeyMesh.world, this.MonkeyMesh.world,
+        dt / 1000 * 2 * Math.PI *    0.3
+    );
+    mat4.rotateX(
+        this.MonkeyMesh.world, this.MonkeyMesh.world,
+        dt / 1000 * 2 * Math.PI *    0.3
+    );
+    mat4.rotateY(
+        this.MonkeyMesh.world, this.MonkeyMesh.world,
+        dt / 1000 * 2 * Math.PI *    0.3
+    );
 
 	if (this.PressedKeys.Forward && !this.PressedKeys.Back) {
 		this.camera.moveForward(dt / 1000 * this.MoveForwardSpeed);
@@ -602,6 +633,7 @@ LightMapDemoScene.prototype._Render = function () {
 
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.Meshes[i].ibo);
 		gl.drawElements(this.renderType, this.Meshes[i].nPoints, gl.UNSIGNED_SHORT, 0);
+		console.log("rendered");
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 	}
 };
