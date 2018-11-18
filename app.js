@@ -13,6 +13,11 @@ async function Init() {
 		alert('Your browser does not support WebGL - please use a different browser\nGoogleChrome works great!');
 		return;
 	}
+    //TODO: add panning as an option on settings
+    //TODO: add panning as an option on settings
+    //TODO: add panning as an option on settings
+    //TODO: add panning as an option on settings//TODO: add panning as an option on settings
+    //TODO: add panning as an option on settings
 
 
     window.oncontextmenu = function ()

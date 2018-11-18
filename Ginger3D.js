@@ -398,6 +398,7 @@ Ginger3D.prototype._Update = function (dt) {
         // pos is in pixel coordinates for the canvas.
         const x = pos.x / window.innerWidth;
         const y = pos.y / window.innerHeight;
+        //TODO: add panning as an option on settings
         if (x > 0.8) {
             this.camera.rotateRight(-dt / 100000 * this.RotateSpeed);
 
