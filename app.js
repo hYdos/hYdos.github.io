@@ -24,21 +24,22 @@ async function Init() {
     var mower = await createColouredModel(gl, "mower.json", [0,0,0], [1,1,1]);
 
     var scene = await readSceneFile("demoScene.G3D");
-	var sceneModels = loadSceneModels(scene);
+    var sceneModels = await createSceneModels(scene, gl);
 
 
-	Scene = new Ginger3D(settings);
-	Scene.Load(sceneModels,
-		function (SceneLoadError) {
-		if (SceneLoadError) {
-			alert('Could not load:' + scene.Title + '; see console for more details');
-			console.error(SceneLoadError);
-		} else {
+    let Engine = new Ginger3D(settings);
+    Engine.Load(sceneModels,
+        function (SceneLoadError) {
+            if (SceneLoadError) {
+                alert('Could not load:' + scene.Title + '; see console for more details');
+                console.error(SceneLoadError);
+            } else {
 
 
 
 
-			Scene.Begin();
-		}
-	});
+                Engine.Begin();
+            }
+        });
+
 }
