@@ -14,6 +14,7 @@ async function Init() {
 		return;
 	}
 
+
     window.oncontextmenu = function ()
     {
         //

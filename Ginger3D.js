@@ -390,6 +390,30 @@ Ginger3D.prototype.End = function () {
 // Private Methods
 //
 Ginger3D.prototype._Update = function (dt) {
+
+
+    window.addEventListener('mousemove', e => {
+
+        const pos = getNoPaddingNoBorderCanvasRelativeMousePosition(e, this.gl.canvas);
+        // pos is in pixel coordinates for the canvas.
+        const x = pos.x / window.innerWidth;
+        const y = pos.y / window.innerHeight;
+        if (x > 0.8) {
+            this.camera.rotateRight(-dt / 100000 * this.RotateSpeed);
+
+        }
+        if (x < 0.3) {
+            this.camera.rotateRight(dt / 100000 * this.RotateSpeed);
+        }
+    });
+
+
+
+
+
+
+
+
     mat4.rotateZ(
         this.MonkeyMesh.world, this.MonkeyMesh.world,
         dt / 1000 * 2 * Math.PI *    0.3

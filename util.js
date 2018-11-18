@@ -23,7 +23,7 @@ function AddEvent(object, type, callback) {
     } else {
         object["on"+type] = callback;
     }
-};
+}
 
 function RemoveEvent(object, type, callback) {
     if (object == null || typeof(object) == 'undefined') return;
@@ -34,7 +34,7 @@ function RemoveEvent(object, type, callback) {
     } else {
         object["on"+type] = callback;
     }
-};
+}
 
 function LoadTextResource (url, cb) {
     var xmlhttp = new XMLHttpRequest();
@@ -49,7 +49,7 @@ function LoadTextResource (url, cb) {
     };
     xmlhttp.onerror = cb;
     xmlhttp.send();
-};
+}
 
 function LoadJSONResource (url, cb) {
     LoadTextResource(url, function (err, res) {
@@ -64,7 +64,7 @@ function LoadJSONResource (url, cb) {
             }
         }
     });
-};
+}
 
 function LoadImage (url, cb) {
     var image = new Image();
@@ -72,4 +72,25 @@ function LoadImage (url, cb) {
         cb (null, image);
     };
     image.src = url;
-};
+}
+
+function getRelativeMousePosition(event, target) {
+    target = target || event.target;
+    var rect = target.getBoundingClientRect();
+
+    return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+    }
+}
+
+// assumes target or event.target is canvas
+function getNoPaddingNoBorderCanvasRelativeMousePosition(event, target) {
+    target = target || event.target;
+    var pos = getRelativeMousePosition(event, target);
+
+    pos.x = pos.x * target.width  / target.clientWidth;
+    pos.y = pos.y * target.height / target.clientHeight;
+
+    return pos;
+}
