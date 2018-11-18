@@ -10,14 +10,9 @@ async function Init() {
 		gl = canvas.getContext('experimental-webgl');
 	}
 	if (!gl) {
-		alert('Your browser does not support WebGL - please use a different browser\nGoogleChrome works great!');
-		return;
-	}
-    //TODO: add panning as an option on settings
-    //TODO: add panning as an option on settings
-    //TODO: add panning as an option on settings
-    //TODO: add panning as an option on settings//TODO: add panning as an option on settings
-    //TODO: add panning as an option on settings
+        alert('Your browser does not support WebGL - please use a different browser\nGoogleChrome works great!');
+        return;
+    }
 
 
     window.oncontextmenu = function ()
@@ -31,7 +26,8 @@ async function Init() {
     const settings = {
 		canvasContext: gl,
         shadowTextureSize: 1024,
-		clearColour: [0.7,0.7,1]
+		clearColour: [0.7,0.7,1],
+        camera: "LEGACY_PANNING"
     };
 
 

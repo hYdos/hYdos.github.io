@@ -3,6 +3,7 @@
   "Title": "Demo scene for testing",
   "Models":[
     {
+      "Name": "mower",
       "FileName": "mower.json",
       "Type": "COLOUR",
       "Colour": [0,0,1],

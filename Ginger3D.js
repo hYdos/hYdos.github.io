@@ -28,6 +28,7 @@ var Ginger3D = function (settings) {
     this.renderType = this.gl.TRIANGLES;
     this.clrColor = settings.clearColour;
     this.Settings = settings;
+    this.cameraPanningEvent = 0;
 };
 
 Ginger3D.prototype.Load = function (models, cb) {
@@ -393,20 +394,37 @@ Ginger3D.prototype._Update = function (dt) {
 
 
     window.addEventListener('mousemove', e => {
+        //TODO: add panning as an option on settings
+        if (this.Settings.camera === "LEGACY_PANNING") {
+			this.cameraPanningEvent = e;
+    	}
+    });
 
-        const pos = getNoPaddingNoBorderCanvasRelativeMousePosition(e, this.gl.canvas);
+    if (this.Settings.camera === "LEGACY_PANNING") {
+        const pos = getNoPaddingNoBorderCanvasRelativeMousePosition(this.cameraPanningEvent, this.gl.canvas);
         // pos is in pixel coordinates for the canvas.
         const x = pos.x / window.innerWidth;
         const y = pos.y / window.innerHeight;
-        //TODO: add panning as an option on settings
-        if (x > 0.8) {
-            this.camera.rotateRight(-dt / 100000 * this.RotateSpeed);
+
+		console.log(dt);
+        if (x > 0.6) {
+            this.camera.rotateRight(-dt / 1000 * this.RotateSpeed);
 
         }
         if (x < 0.3) {
-            this.camera.rotateRight(dt / 100000 * this.RotateSpeed);
+            this.camera.rotateRight(dt / 1000 * this.RotateSpeed);
         }
-    });
+
+        //TODO: add up/down panning
+        // if (y > 0.6) {
+        //     this.camera.rotateRight(-dt / 1000 * this.RotateSpeed);
+		//
+        // }
+        // if (y < 0.3) {
+        //     this.camera.rotateRight(dt / 1000 * this.RotateSpeed);
+        // }
+    }
+
 
 
 
