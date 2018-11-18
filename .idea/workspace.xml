@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e62e0a0-fc0e-4ae9-be7a-4db7329eec26" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Ginger3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/Ginger3D.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SceneReader.js" beforeDir="false" afterPath="$PROJECT_DIR$/SceneReader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demoScene.G3D" beforeDir="false" afterPath="$PROJECT_DIR$/demoScene.G3D" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -67,19 +67,19 @@
         <counts>
           <entry key="G3D" value="304" />
           <entry key="G3DS" value="4" />
-          <entry key="html" value="50" />
-          <entry key="js" value="2470" />
+          <entry key="html" value="52" />
+          <entry key="js" value="2536" />
           <entry key="json" value="5" />
-          <entry key="txt" value="18" />
+          <entry key="txt" value="147" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="DTD" value="4" />
-          <entry key="HTML" value="50" />
+          <entry key="HTML" value="52" />
           <entry key="JSON" value="309" />
-          <entry key="JavaScript" value="2470" />
-          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="JavaScript" value="2536" />
+          <entry key="PLAIN_TEXT" value="147" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -106,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Ginger3D.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="38" column="45" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="45" />
+            <state relative-caret-position="153">
+              <caret line="72" column="32" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -124,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="61" lean-forward="true" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+            <state relative-caret-position="221">
+              <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -133,8 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+            <state relative-caret-position="389">
+              <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="70" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -164,8 +164,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SceneReader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+            <state relative-caret-position="17">
+              <caret line="1" column="45" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -198,9 +198,10 @@
         <option value="$PROJECT_DIR$/LightMapDemoScene.js" />
         <option value="$PROJECT_DIR$/Models.js" />
         <option value="$PROJECT_DIR$/DemoScene.G3DS" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/demoScene.G3D" />
         <option value="$PROJECT_DIR$/SceneReader.js" />
+        <option value="$PROJECT_DIR$/Ginger3D.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
@@ -217,7 +218,7 @@
       <path value="$PROJECT_DIR$/bower_components/gl-matrix/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="width" value="1522" />
     <option name="height" value="1932" />
@@ -282,7 +283,7 @@
       <workItem from="1542401369334" duration="282000" />
       <workItem from="1542419242269" duration="1457000" />
       <workItem from="1542424791684" duration="597000" />
-      <workItem from="1542448912777" duration="20570000" />
+      <workItem from="1542448912777" duration="22228000" />
     </task>
     <task id="LOCAL-00001" summary="commited a commit">
       <created>1542524590829</created>
@@ -291,11 +292,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542524590829</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="you can now add models and stuff to a .G3D file (example included) and it will be loaded into the scene (5-10% completed)">
+      <created>1542526495326</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1542526495326</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24330000" />
+    <option name="totallyTimeSpent" value="25988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
@@ -328,7 +336,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commited a commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commited a commit" />
+    <MESSAGE value="you can now add models and stuff to a .G3D file (example included) and it will be loaded into the scene (5-10% completed)" />
+    <option name="LAST_COMMIT_MESSAGE" value="you can now add models and stuff to a .G3D file (example included) and it will be loaded into the scene (5-10% completed)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/output.json">
@@ -364,24 +373,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ginger3D.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="38" column="45" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Models.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -398,15 +389,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SceneReader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="17">
+          <caret line="1" column="45" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ginger3D.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="72" column="32" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="70" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="61" lean-forward="true" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+        <state relative-caret-position="221">
+          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
         </state>
       </provider>
     </entry>

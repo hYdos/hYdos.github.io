@@ -71,26 +71,6 @@ Ginger3D.prototype.Load = function (models, cb) {
 		for (var i = 0; i < loadResults.Models.RoomModel.meshes.length; i++) {
             var mesh = loadResults.Models.RoomModel.meshes[i];
             switch (mesh.name) {
-                case 'TableMesh':
-                    me.TableMesh = new ColouredModel(
-                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-                        mesh.normals, vec4.fromValues(1, 0, 1, 1)
-                    );
-                    mat4.translate(
-                        me.TableMesh.world, me.TableMesh.world,
-                        vec3.fromValues(1.57116, -0.79374, 0.49672)
-                    );
-                    break;
-                case 'SofaMesh':
-                    me.SofaMesh = new ColouredModel(
-                        me.gl, mesh.vertices, [].concat.apply([], mesh.faces),
-                        mesh.normals, vec4.fromValues(0, 1, 1, 1)
-                    );
-                    mat4.translate(
-                        me.SofaMesh.world, me.SofaMesh.world,
-                        vec3.fromValues(-3.28768, 0, 0.78448)
-                    );
-                    break;
                 case 'LightBulbMesh':
                     me.lightPosition = vec3.fromValues(0, 0.0, 2.58971);
                     me.LightMesh = new ColouredModel(

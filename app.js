@@ -14,6 +14,14 @@ async function Init() {
 		return;
 	}
 
+    window.oncontextmenu = function ()
+    {
+        //
+        //stop person from seeing normal right click menu
+        //
+        return false;
+    }
+
     const settings = {
 		canvasContext: gl,
         shadowTextureSize: 1024,
