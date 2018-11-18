@@ -30,7 +30,7 @@ var LightMapDemoScene = function (gl) {
 };
 
 LightMapDemoScene.prototype.Load = async function (models, cb) {
-	console.log('Loading demo scene');
+	console.log('Loading scene');
     tick();
 	var me = this;
 
@@ -379,7 +379,7 @@ LightMapDemoScene.prototype.Unload = function () {
 };
 
 LightMapDemoScene.prototype.Begin = function () {
-	console.log('Beginning demo scene');
+	console.log('Beginning scene');
 
 	var me = this;
 
@@ -475,7 +475,7 @@ LightMapDemoScene.prototype._Update = function (dt) {
 	}
 
 	this.lightDisplacementInputAngle += dt / 300;
-	var xDisplacement = Math.sin(this.lightDisplacementInputAngle) * 2.3;
+	var xDisplacement = Math.sin(this.lightDisplacementInputAngle) * 4.3;
 
 	this.LightMesh.world[12] = xDisplacement;
 	for (var i = 0; i < this.shadowMapCameras.length; i++) {
