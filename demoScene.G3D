@@ -7,7 +7,7 @@
       "FileName": "mower.json",
       "Type": "COLOUR",
       "Colour": [0,0,1],
-      "Position": [0,0,0],
+      "Position": [4,0,0],
       "Rotation": [0,0,0]
     }
   ]

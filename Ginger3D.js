@@ -405,7 +405,7 @@ Ginger3D.prototype._Update = function (dt) {
         // pos is in pixel coordinates for the canvas.
         const x = pos.x / window.innerWidth;
         const y = pos.y / window.innerHeight;
-        
+
         if (x > 0.6) {
             this.camera.rotateRight(-dt / 1000 * this.RotateSpeed);
 
