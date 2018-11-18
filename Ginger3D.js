@@ -23,13 +23,14 @@ function computeFps() {
     }
 }
 
-var LightMapDemoScene = function (gl) {
-	this.gl = gl;
-    this.renderType = gl.TRIANGLES;
-    this.clrColor = [1,0.5,0.5];
+var Ginger3D = function (settings) {
+	this.gl = settings.canvasContext;
+    this.renderType = this.gl.TRIANGLES;
+    this.clrColor = settings.clearColour;
+    this.Settings = settings;
 };
 
-LightMapDemoScene.prototype.Load = function (models, cb) {
+Ginger3D.prototype.Load = function (models, cb) {
 	console.log('Loading scene');
     tick();
 	var me = this;
@@ -325,12 +326,12 @@ LightMapDemoScene.prototype.Load = function (models, cb) {
 
 	me.MoveForwardSpeed = 3.5;
 	me.RotateSpeed = 1.5;
-	me.textureSize = getParameterByName('texSize') || 512;
+	me.textureSize = getParameterByName('texSize') || this.Settings.shadowTextureSize;
 
 	me.lightDisplacementInputAngle = 0.0;
 };
 
-LightMapDemoScene.prototype.Unload = function () {
+Ginger3D.prototype.Unload = function () {
 	this.LightMesh = null;
 	this.MonkeyMesh = null;
 	this.TableMesh = null;
@@ -358,7 +359,7 @@ LightMapDemoScene.prototype.Unload = function () {
 	this.shadowMapViewMatrices = null;
 };
 
-LightMapDemoScene.prototype.Begin = function () {
+Ginger3D.prototype.Begin = function () {
 	console.log('Beginning scene');
 
 	var me = this;
@@ -389,7 +390,7 @@ LightMapDemoScene.prototype.Begin = function () {
 	me._OnResizeWindow();
 };
 
-LightMapDemoScene.prototype.End = function () {
+Ginger3D.prototype.End = function () {
 	if (this.__ResizeWindowListener) {
 		RemoveEvent(window, 'resize', this.__ResizeWindowListener);
 	}
@@ -408,7 +409,7 @@ LightMapDemoScene.prototype.End = function () {
 //
 // Private Methods
 //
-LightMapDemoScene.prototype._Update = function (dt) {
+Ginger3D.prototype._Update = function (dt) {
     mat4.rotateZ(
         this.MonkeyMesh.world, this.MonkeyMesh.world,
         dt / 1000 * 2 * Math.PI *    0.3
@@ -466,7 +467,7 @@ LightMapDemoScene.prototype._Update = function (dt) {
 	this.camera.GetViewMatrix(this.viewMatrix);
 };
 
-LightMapDemoScene.prototype._GenerateShadowMap = function () {
+Ginger3D.prototype._GenerateShadowMap = function () {
 	var gl = this.gl;
 
 	// Set GL state status
@@ -551,7 +552,7 @@ LightMapDemoScene.prototype._GenerateShadowMap = function () {
 	gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
 };
 
-LightMapDemoScene.prototype._Render = function () {
+Ginger3D.prototype._Render = function () {
 	var gl = this.gl;
 
 	// Clear back buffer, set per-frame uniforms
@@ -618,7 +619,7 @@ LightMapDemoScene.prototype._Render = function () {
 //
 // Event Listeners
 //
-LightMapDemoScene.prototype._OnResizeWindow = function () {
+Ginger3D.prototype._OnResizeWindow = function () {
 	var gl = this.gl;
 
 	var targetHeight = window.innerWidth * 9 / 16;
@@ -640,7 +641,7 @@ LightMapDemoScene.prototype._OnResizeWindow = function () {
 	gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
 };
 
-LightMapDemoScene.prototype._OnKeyDown = function (e) {
+Ginger3D.prototype._OnKeyDown = function (e) {
 	switch(e.code) {
 		case 'KeyW':
 			this.PressedKeys.Forward = true;
@@ -669,7 +670,7 @@ LightMapDemoScene.prototype._OnKeyDown = function (e) {
 	}
 };
 
-LightMapDemoScene.prototype._OnKeyUp = function (e) {
+Ginger3D.prototype._OnKeyUp = function (e) {
 	switch(e.code) {
 		case 'KeyW':
 			this.PressedKeys.Forward = false;

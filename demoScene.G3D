@@ -1,0 +1,11 @@
+{
+  "FileVersion": 1,
+  "Title": "Demo scene for testing",
+  "Models":[
+    {
+      "FileName": "mower.json",
+      "Type": "COLOUR",
+      "Colour": [0,0,1]
+    }
+  ]
+}

@@ -1,46 +1,47 @@
 <html>
-<head>
-	<title>Ginger3D.js</title>
-</head>
-<body scroll="no" style="overflow: hidden" onload="Init();">
+	<head>
+		<title>Ginger3D.js</title>
+	</head>
+	<body scroll="no" style="overflow: hidden" onload="Init();">
 
-<style>
-	body {
-		margin: 0;
-	}
-	canvas {
-		width: 100vw;
-		height: 100vh;
-		display: block;
-	}
-	.container {
-		position: relative;
-	}
-	#overlay {
-		position: absolute;
-		left: 10px;
-		top: 10px;
-		background-color: rgba(0, 0, 0, 0.5);
-		color: white;
-		font-family: monospace;
-		padding: 1em;
-	}
+		<style>
+			body {
+				margin: 0;
+			}
+			canvas {
+				width: 100vw;
+				height: 100vh;
+				display: block;
+			}
+			.container {
+				position: relative;
+			}
+			#overlay {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+				background-color: rgba(0, 0, 0, 0.5);
+				color: white;
+				font-family: monospace;
+				padding: 1em;
+			}
 
-</style>
-<div class="container">
-	<canvas id="gl-surface" width="800" height="600"></canvas>
-	<div id="overlay" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">
-		<h1 id="FPS">fps</h1>
-	</div>
-</div>
-<script src="bower_components/async/dist/async.min.js"></script>
-<script src="bower_components/gl-matrix/dist/gl-matrix-min.js"></script>
+		</style>
+		<div class="container">
+			<canvas id="gl-surface" width="800" height="600"></canvas>
+			<div id="overlay" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+				<h1 id="FPS">fps</h1>
+			</div>
+		</div>
+		<script src="bower_components/async/dist/async.min.js"></script>
+		<script src="bower_components/gl-matrix/dist/gl-matrix-min.js"></script>
 
-<script src="app.js"></script>
-<script src="util.js"></script>
-<script src="asyncFile.js"></script>
-<script src="Models.js"></script>
-<script src="LightMapDemoScene.js"></script>
+		<script src="SceneReader.js"></script>
+		<script src="app.js"></script>
+		<script src="util.js"></script>
+		<script src="asyncFile.js"></script>
+		<script src="Models.js"></script>
+		<script src="Ginger3D.js"></script>
 
-</body>
+	</body>
 </html>
