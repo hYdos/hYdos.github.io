@@ -29,12 +29,18 @@ var LightMapDemoScene = function (gl) {
     this.clrColor = [1,0.5,0.5];
 };
 
-LightMapDemoScene.prototype.Load = async function (models, cb) {
+LightMapDemoScene.prototype.Load = function (models, cb) {
 	console.log('Loading scene');
     tick();
 	var me = this;
 
-    const customModelTest = await loadJsonFile("mower.json");
+	console.log(models.length);
+    for (var i = 0; i < models.length; i++) {
+
+		me.MonkeyMesh = models[0];
+
+        //load model into list
+    }
 
 	async.parallel({
 		Models: function (callback) {
@@ -102,39 +108,13 @@ LightMapDemoScene.prototype.Load = async function (models, cb) {
                     break;
             }
         }
-        me.MonkeyMesh = new ColouredModel(me.gl, customModelTest.meshes[0].vertices, [].concat.apply([], customModelTest.meshes[0].faces), customModelTest.meshes[0].normals, vec4.fromValues(0.8, 0.8, 1.0, 1.0));
-        mat4.rotate(
-            me.MonkeyMesh.world, me.MonkeyMesh.world,
-            glMatrix.toRadian(94.87),
-            vec3.fromValues(0, 0, -1)
-        );
-        mat4.translate(
-            me.MonkeyMesh.world, me.MonkeyMesh.world,
-            vec4.fromValues(2.07919, -0.98559, 1.75740)
-        );
 
-		if (!me.MonkeyMesh) {
-			cb('Failed to load monkey mesh'); return;
-		}
-		if (!me.TableMesh) {
-			cb('Failed to load table mesh'); return;
-		}
-		if (!me.SofaMesh) {
-			cb('Failed to load sofa mesh'); return;
-		}
-		if (!me.LightMesh) {
-			cb('Failed to load light mesh'); return;
-		}
-		if (!me.WallsMesh) {
-			cb('Failed to load walls mesh'); return;
-		}
-		me.Meshes = [
-			me.MonkeyMesh,
-			me.TableMesh,
-			me.SofaMesh,
-			me.LightMesh,
-			me.WallsMesh
-		];
+        //tmp add all demo models to modelList
+        models.push(me.WallsMesh);
+        models.push(me.LightMesh);
+        models.push(me.WallsMesh);
+
+		me.Meshes = models;
 
 		//
 		// Create Shaders

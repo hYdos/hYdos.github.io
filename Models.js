@@ -22,9 +22,21 @@ var ColouredModel = function (gl, vertices, indices, normals, color) {
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 };
 
-var createColouredModel = async function (gl, File, Colour) {
+var createColouredModel = async function (gl, File, colour, xyz) {
+	var f = await loadJsonFile(File);
+	var mesh = f.meshes[0];
+    var model = new ColouredModel(gl, mesh.vertices, [].concat.apply([], mesh.faces), mesh.normals, vec4.fromValues(colour[0], colour[1], colour[2], 1.0));
+    mat4.rotate(
+        model.world, model.world,
+        glMatrix.toRadian(94.87),
+        vec3.fromValues(0, 0, 0)
+    );
+    mat4.translate(
+        model.world,model.world,
+        vec4.fromValues(xyz[0], xyz[1], xyz[2])
+    );
 
-
+    return model;
 
 };
 
