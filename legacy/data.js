@@ -386,19 +386,20 @@ G.AddData({
 							var born = 0;
 							var birthRate = 1;
 							if (me.amount < 100) birthRate *= 3;//more births if low pop
-							if (me.amount < 10) birthRate *= 3;//even more births if very low pop
+							if (me.amount < 10) birthRate += 4;//even more births if very low pop
 							if (G.checkPolicy('fertility rituals') == 'on') birthRate *= 1.4;
 							if (G.checkPolicy('population control') == 'forbidden') birthRate *= 0.1;
 							else if (G.checkPolicy('population control') == 'limited') birthRate *= 0.5;
 							if (teenCount > 2) {
-								birthRate *= 1.2
+								birthRate *= 1.5;
 							}
-							birthRate *= productionMult;
+							birthRate;
 							if (homeless > 0 && me.amount > 15) birthRate *= 0.05;//harder to make babies if you have more than 15 people and some of them are homeless
 							var n = randomFloor(G.getRes('adult').amount * 0.0003 * birthRate); G.gain('baby', n, 'birth'); G.gain('happiness', n * 10, 'birth'); born += n;
 							var n = randomFloor(G.getRes('elder').amount * 0.00003 * birthRate); G.gain('baby', n, 'birth'); G.gain('happiness', n * 10, 'birth'); born += n;
 							G.getRes('born this year').amount += born;
 							if (born > 0) G.Message({ type: 'good', mergeId: 'born', textFunc: function (args) { return B(args.born) + ' ' + (args.born == 1 ? 'baby has' : 'babies have') + ' been born.'; }, args: { born: born }, icon: [2, 3] });
+							console.log(birthRate);
 						}
 
 						//health (diseases and wounds)
