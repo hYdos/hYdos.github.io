@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.fabricmc</groupId>
   <artifactId>fabric-loader</artifactId>
-  <version>temp</version>
+  <version>fabric-loader-temp</version>
   <packaging>pom</packaging>
   <dependencies/>
 </project>
